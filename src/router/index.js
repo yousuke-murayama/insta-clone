@@ -4,6 +4,7 @@ import ImagesIndex from '@/views/ImagesIndex.vue'
 import ImagesUpload from '@/views/ImagesUpload.vue'
 import ImagesShow from '@/views/ImagesShow.vue'
 import ImagesFavorites from '@/views/ImagesFavorites.vue'
+import ImagesSearch from '@/views/ImagesSearch.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/favorites',
     name: 'ImagesFavorites',
     component: ImagesFavorites
+  },
+  {
+    path: '/search',
+    name: 'ImagesSearch',
+    component: ImagesSearch
   }
 ]
 

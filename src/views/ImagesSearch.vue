@@ -1,13 +1,25 @@
 <template>
   <div>
-    <p>Favorites</p>
+    <p>SearchImages</p>
+    <v-col cols="12" sm="9" offset-sm="1">
+      <v-row>
+        <v-text-field 
+          label="タグで検索"
+          v-model="tagName">
+          <v-icon slot="prepend">
+            mdi-magnify
+          </v-icon>
+        </v-text-field> 
+      </v-row>
+    </v-col>
+    
     <v-row>
       <v-col
-        v-for="post in favoritePosts" :key="post.id"
+        v-for="post in searchedPosts" :key="post.id"
         cols="6"
         sm="4"
         md="3"
-      >
+        >
         <v-card width="250px">
           <v-avatar tile size="250">
             <v-img
@@ -25,9 +37,14 @@
 
 <script>
 export default {
-  name: 'ImagesFavorites',
+  name: 'ImagesSearch',
   props: {
     posts: Array
+  },
+  data() {
+    return {
+      tagName: ''
+    }
   },
   methods: {
     goToShowPage(id) {
@@ -35,8 +52,8 @@ export default {
     }
   },
   computed: {
-    favoritePosts() {
-      return this.posts.filter((post) => post.favorite === true);
+    searchedPosts() {
+      return this.posts.filter((post) => post.imgTags.includes(this.tagName));
     }
   }
 }
