@@ -1,12 +1,13 @@
 <template>
   <v-app>
-    <HeaderView/>
+    <HeaderView @delete-all-posts="deleteAllPosts"/>
     <v-main>
       <v-container>
         <router-view
         :posts="posts"
         @post-picture="postPicture"
-        @toggle-favorite="toggleFavorite"/>
+        @toggle-favorite="toggleFavorite"
+        />
       </v-container>
     </v-main>
     <FooterView/>
@@ -56,6 +57,16 @@ export default {
     },
     goToUploadPage() {
       this.$router.push('/upload');
+    },
+    deleteAllPosts() {
+      console.log('delete');
+      const isDeleted = '全ての投稿を削除します。よろしいですか？';
+      if(window.confirm(isDeleted)) {
+        localStorage.setItem(STORAGE_KEY, '');
+        localStorage.removeItem(STORAGE_KEY);
+        this.posts = [];
+        window.location.reload();
+      }
     }
   },
   mounted() {
