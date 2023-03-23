@@ -7,7 +7,7 @@
           cols="6"
           sm="4"
           md="3"
-          >
+        >
           <v-card width="250px">
             <v-avatar tile size="250">
               <v-img

@@ -1,7 +1,56 @@
 <template>
   <div>
-    <p>ImagesShow</p>
-    <p>{{ posts[this.$route.params.id].comment }}</p>
+    <v-row>
+      <v-col>
+        <v-card
+          class="mx-auto"
+          max-width="550"
+        >
+          <v-avatar tile size="550">
+            <v-img
+              :src="posts[this.$route.params.id].imgLink"
+            >
+            </v-img>
+          </v-avatar>
+
+          <div class="tagLists">
+            <v-card-subtitle 
+              v-for="tag in posts[this.$route.params.id].imgTags" 
+              :key="tag"
+              class="tagLists__child"
+            >
+              {{ `#${tag}` }}
+            </v-card-subtitle>
+          </div >
+          
+          <v-card-actions>
+
+            <v-spacer></v-spacer>
+
+            <v-btn icon>
+              <v-icon>mdi-heart</v-icon>
+            </v-btn>
+
+            <v-btn
+              icon
+              @click="isShow = !isShow"
+            >
+              <v-icon>{{ isShow ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+            </v-btn>
+          </v-card-actions>
+
+          <v-expand-transition>
+            <div v-show="isShow">
+              <v-divider></v-divider>
+
+              <v-card-text>
+                {{ posts[this.$route.params.id].comment }}
+              </v-card-text>
+            </div>
+          </v-expand-transition>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -13,7 +62,7 @@ export default {
   },
   data() {
     return {
-
+      isShow: true
     }
   },
   methods: {
@@ -22,6 +71,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
+.tagLists {
+  display: flex;
+  justify-content: flex-start;
 
+  &__child {
+    padding-bottom: 0;
+  }
+}
 </style>

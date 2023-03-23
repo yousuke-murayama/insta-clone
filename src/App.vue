@@ -59,7 +59,6 @@ export default {
       this.$router.push('/upload');
     },
     deleteAllPosts() {
-      console.log('delete');
       const isDeleted = '全ての投稿を削除します。よろしいですか？';
       if(window.confirm(isDeleted)) {
         localStorage.setItem(STORAGE_KEY, '');
