@@ -7,6 +7,7 @@
         :posts="posts"
         @post-picture="postPicture"
         @toggle-favorite="toggleFavorite"
+        @delete-post="deletePost"
         />
       </v-container>
     </v-main>
@@ -58,14 +59,28 @@ export default {
     goToUploadPage() {
       this.$router.push('/upload');
     },
-    deleteAllPosts() {
-      const isDeleted = '全ての投稿を削除します。よろしいですか？';
+    deletePost(e) {
+      const isDeleted = '削除してもよろしいですか？';
       if(window.confirm(isDeleted)) {
+        this.posts.splice(e, 1);
+        this.resetIds();
+        this.savePosts();
+        this.$router.push('/');
+      }
+    },
+    deleteAllPosts() {
+      const isAllDeleted = '全ての投稿を削除します。よろしいですか？';
+      if(window.confirm(isAllDeleted)) {
         localStorage.setItem(STORAGE_KEY, '');
         localStorage.removeItem(STORAGE_KEY);
         this.posts = [];
         window.location.reload();
       }
+    },
+    resetIds() {
+      this.posts.forEach((post, index) => {
+        post.id = index;
+      });
     }
   },
   mounted() {

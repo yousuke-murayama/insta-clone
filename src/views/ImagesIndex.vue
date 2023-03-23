@@ -19,7 +19,7 @@
             </v-avatar>
             <v-card-actions>
               <v-btn icon @click="toggleFavorite(post.id)">
-                <v-icon :class="{heartClass: post.favorite}">mdi-heart</v-icon>
+                <v-icon :class="{isFavorite: post.favorite}">mdi-heart</v-icon>
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.heartClass {
+.isFavorite {
   color: #FF66CC !important;
 }
 

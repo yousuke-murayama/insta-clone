@@ -27,8 +27,16 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn icon>
-              <v-icon>mdi-heart</v-icon>
+            <v-btn icon @click="toggleFavorite">
+              <v-icon 
+                :class="{isFavorite: posts[this.$route.params.id].favorite}"
+              >
+                mdi-heart
+              </v-icon>
+            </v-btn>
+
+            <v-btn icon @click="deletePost">
+              <v-icon>mdi-delete-alert</v-icon>
             </v-btn>
 
             <v-btn
@@ -66,7 +74,12 @@ export default {
     }
   },
   methods: {
-
+    toggleFavorite() {
+      this.$emit('toggle-favorite', this.$route.params.id);
+    },
+    deletePost() {
+      this.$emit('delete-post', this.$route.params.id);
+    }
   }
 }
 </script>
@@ -79,5 +92,9 @@ export default {
   &__child {
     padding-bottom: 0;
   }
+}
+
+.isFavorite {
+  color: #FF66CC !important;
 }
 </style>
