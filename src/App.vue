@@ -4,10 +4,10 @@
     <v-main>
       <v-container>
         <router-view
-        :posts="posts"
-        @post-picture="postPicture"
-        @toggle-favorite="toggleFavorite"
-        @delete-post="deletePost"
+          :posts="posts"
+          @post-picture="postPicture"
+          @toggle-favorite="toggleFavorite"
+          @delete-post="deletePost"
         />
       </v-container>
     </v-main>

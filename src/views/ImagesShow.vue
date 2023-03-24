@@ -27,13 +27,10 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn icon @click="toggleFavorite">
-              <v-icon 
-                :class="{isFavorite: posts[this.$route.params.id].favorite}"
-              >
-                mdi-heart
-              </v-icon>
-            </v-btn>
+            <FavoriteBtn 
+              :posts="posts"
+              @toggle-favorite="toggleFavorite"
+            />
 
             <v-btn icon @click="deletePost">
               <v-icon>mdi-delete-alert</v-icon>
@@ -63,8 +60,13 @@
 </template>
 
 <script>
+import FavoriteBtn from '@/components/FavoriteBtn.vue';
+
 export default {
   name: 'ImagesShow',
+  components: {
+    FavoriteBtn
+  },
   props: {
     posts: Array
   },
@@ -92,9 +94,5 @@ export default {
   &__child {
     padding-bottom: 0;
   }
-}
-
-.isFavorite {
-  color: #FF66CC !important;
 }
 </style>
