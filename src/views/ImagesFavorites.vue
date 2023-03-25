@@ -2,36 +2,33 @@
   <div>
     <p>Favorites</p>
     <v-row>
-      <v-col
-        v-for="post in favoritePosts" :key="post.id"
-        cols="6"
-        sm="4"
-        md="3"
-      >
-        <v-card width="250px">
-          <v-avatar tile size="250">
-            <v-img
-              max-heigth="350"
-              :src="post.imgLink"
-              @click="goToShowPage(post.id)"
-            >
-            </v-img>
-          </v-avatar>
-        </v-card>
-      </v-col>
+      <ImageLists
+        v-for="post in favoritePosts" 
+        :key="post.id"
+        :post="post"
+        @toggle-favorite="toggleFavorite"
+      />
     </v-row>
   </div>
 </template>
 
 <script>
+import ImageLists from '@/components/ImageLists.vue';
+
 export default {
   name: 'ImagesFavorites',
+  components: {
+    ImageLists
+  },
   props: {
     posts: Array
   },
   methods: {
     goToShowPage(id) {
       this.$router.push(`/show/${id}`);
+    },
+    toggleFavorite(e) {
+      this.$emit('toggle-favorite', e);
     }
   },
   computed: {
@@ -42,6 +39,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
+.isFavorite {
+  color: #FF66CC !important;
+}
 
 </style>
