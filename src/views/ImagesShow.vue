@@ -21,7 +21,7 @@
             >
               {{ `#${tag}` }}
             </v-card-subtitle>
-          </div >
+          </div>
           
           <v-card-actions>
 
@@ -31,6 +31,10 @@
               :posts="posts"
               @toggle-favorite="toggleFavorite"
             />
+
+            <v-btn icon @click="goToEditPage">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
 
             <v-btn icon @click="deletePost">
               <v-icon>mdi-delete-alert</v-icon>
@@ -81,6 +85,9 @@ export default {
     },
     deletePost() {
       this.$emit('delete-post', this.$route.params.id);
+    },
+    goToEditPage() {
+      this.$router.push(`/edit/${this.$route.params.id}`);
     }
   }
 }
@@ -90,6 +97,7 @@ export default {
 .tagLists {
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
 
   &__child {
     padding-bottom: 0;

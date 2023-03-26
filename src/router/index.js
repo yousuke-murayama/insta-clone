@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import ImagesIndex from '@/views/ImagesIndex.vue'
 import ImagesUpload from '@/views/ImagesUpload.vue'
 import ImagesShow from '@/views/ImagesShow.vue'
+import ImagesEdit from '@/views/ImagesEdit.vue'
 import ImagesFavorites from '@/views/ImagesFavorites.vue'
 import ImagesSearch from '@/views/ImagesSearch.vue'
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/show/:id',
     name: 'ImagesShow',
     component: ImagesShow
+  },
+  {
+    path: '/edit/:id',
+    name: 'ImagesEdit',
+    component: ImagesEdit
   },
   {
     path: '/favorites',
