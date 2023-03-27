@@ -5,7 +5,10 @@
     <v-row>
       <v-col cols="12" sm="8" offset-sm="2">
         <ul class="tagLists">
-          <li v-for="tag in posts[this.id].imgTags" :key="tag">
+          <li 
+            v-for="(tag, index) in posts[this.id].imgTags" 
+            :key="index"
+          >
             {{ `#${tag}` }}
           </li>
         </ul>
@@ -19,7 +22,8 @@
           <v-btn
             :disabled="!tag"
             color="primary"
-            class="addBtn" 
+            class="addTagBtn"
+            @click="addTag" 
           >
             タグを追加
           </v-btn>
@@ -28,6 +32,7 @@
           <v-btn
             color="red"
             dark
+            @click="deleteTags"
           >
             <v-icon left>mdi-delete</v-icon>タグを削除
           </v-btn>
@@ -62,6 +67,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'ImagesEdit',
   props: {
@@ -75,7 +81,27 @@ export default {
     }
   },
   methods: {
-
+    addTag() {
+      if(this.post.imgTags.length >= 5) {
+        alert('一つの投稿につき、タグは5個までです。');
+        this.tag = '';
+      } else {
+        this.$emit('add-tag', {
+          id: this.id,
+          tag: this.tag
+        });
+        this.tag = '';
+      }
+    },
+    deleteTags() {
+      this.$emit('delete-tags', this.id);
+    },
+    saveEdition() {
+      this.$emit('save-edition', {
+        id: this.id,
+        comment: this.post.comment
+      });
+    }
   }
 }
 </script>
@@ -95,7 +121,7 @@ export default {
   margin-top: 10px;
 }
 
-.addBtn {
+.addTagBtn {
   margin-right: 5px;
 }
 

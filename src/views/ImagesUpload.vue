@@ -25,7 +25,10 @@
         </v-btn>
         <!-- タグ一覧 -->
         <ul class="tagLists" v-show="isShow">
-          <li v-for="imgTag in post.imgTags" :key="imgTag">
+          <li 
+            v-for="(imgTag, index) in post.imgTags" 
+            :key="index"
+          >
             {{ `#${imgTag}` }}
           </li>
         </ul>

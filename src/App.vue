@@ -8,6 +8,9 @@
           @post-picture="postPicture"
           @toggle-favorite="toggleFavorite"
           @delete-post="deletePost"
+          @add-tag="addTag"
+          @delete-tags="deleteTags"
+          @save-edition="saveEdition"
         />
       </v-container>
     </v-main>
@@ -20,6 +23,7 @@ import HeaderView from '@/global/HeaderView.vue'
 import FooterView from '@/global/FooterView.vue'
 
 const STORAGE_KEY = "Posts";
+const isDeleted = '削除してもよろしいですか？';
 
 export default {
   name: 'App',
@@ -60,7 +64,6 @@ export default {
       this.$router.push('/upload');
     },
     deletePost(e) {
-      const isDeleted = '削除してもよろしいですか？';
       if(window.confirm(isDeleted)) {
         this.posts.splice(e, 1);
         this.resetIds();
@@ -76,6 +79,19 @@ export default {
         this.posts = [];
         window.location.reload();
       }
+    },
+    addTag(e) {
+      this.posts[e.id].imgTags.push(e.tag);
+    },
+    deleteTags(e) {
+      if(window.confirm(isDeleted)) {
+        this.posts[e].imgTags = [];
+      }
+    },
+    saveEdition(e) {
+      this.posts[e.id].comment = e.comment;
+      this.savePosts();
+      this.$router.push(`/show/${e.id}`);
     },
     resetIds() {
       this.posts.forEach((post, index) => {

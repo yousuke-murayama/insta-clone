@@ -15,8 +15,8 @@
 
           <div class="tagLists">
             <v-card-subtitle 
-              v-for="tag in posts[this.$route.params.id].imgTags" 
-              :key="tag"
+              v-for="(tag, index) in posts[this.$route.params.id].imgTags" 
+              :key="index"
               class="tagLists__child"
             >
               {{ `#${tag}` }}
