@@ -18,7 +18,6 @@
             label="タグ"
           ></v-text-field>
           
-          <!-- addTagメソッドを後で追加 -->
           <v-btn
             :disabled="!tag"
             color="primary"
@@ -28,7 +27,6 @@
             タグを追加
           </v-btn>
 
-          <!-- deleteTagsメソッドを後で追加 -->
           <v-btn
             color="red"
             dark
@@ -52,7 +50,6 @@
           v-model="post.comment"
         ></v-textarea>
 
-        <!-- saveEditionメソッドは未定義 -->
         <v-btn 
           block 
           color="success"
@@ -102,7 +99,20 @@ export default {
         comment: this.post.comment
       });
     }
-  }
+  },
+  beforeRouteLeave(to, from, next) {
+    if(to.path === `/show/${this.id}`) {
+      next();
+    } else {
+      const answer = window.confirm('編集中のものは保存されませんが、よろしいですか？');
+      if(answer) {
+          next();
+          window.location.reload();
+        } else {
+          next(`/edit/${this.id}`);
+      } 
+    }
+  }  
 }
 </script>
 

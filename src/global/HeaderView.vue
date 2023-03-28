@@ -51,7 +51,6 @@ export default {
     },
     goToHome() {
       this.$router.push('/');
-      window.location.reload();
     },
     goToFavoritesPage() {
       this.$router.push('/favorites');
