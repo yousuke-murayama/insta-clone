@@ -47,16 +47,16 @@ export default {
   name: 'Header',
   methods: {
     goToUploadPage() {
-      this.$router.push('/upload');
+      this.$router.push('/upload').catch(() => {});
     },
     goToHome() {
-      this.$router.push('/');
+      this.$router.push('/').catch(() => {});
     },
     goToFavoritesPage() {
-      this.$router.push('/favorites');
+      this.$router.push('/favorites').catch(() => {});
     },
     goToSearchPage() {
-      this.$router.push('/search');
+      this.$router.push('/search').catch(() => {});
     },
     deleteAllPosts() {
       this.$emit('delete-all-posts');
