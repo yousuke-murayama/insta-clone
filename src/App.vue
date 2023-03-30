@@ -72,12 +72,14 @@ export default {
       }
     },
     deleteAllPosts() {
-      const isAllDeleted = '全ての投稿を削除します。よろしいですか？';
-      if(window.confirm(isAllDeleted)) {
-        localStorage.setItem(STORAGE_KEY, '');
-        localStorage.removeItem(STORAGE_KEY);
-        this.posts = [];
-        window.location.reload();
+      if(this.posts.length !== 0) {
+        const isAllDeleted = '全ての投稿を削除します。よろしいですか？';
+        if(window.confirm(isAllDeleted)) {
+          localStorage.setItem(STORAGE_KEY, '');
+          localStorage.removeItem(STORAGE_KEY);
+          this.posts = [];
+          window.location.reload();
+        }
       }
     },
     addTag(e) {

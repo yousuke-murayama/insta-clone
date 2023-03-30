@@ -100,6 +100,7 @@ export default {
       });
     }
   },
+  //beforeRouteEnterでページをリロードしたときに値を渡したい
   beforeRouteLeave(to, from, next) {
     if(to.path === `/show/${this.id}`) {
       next();
@@ -112,7 +113,7 @@ export default {
           next(`/edit/${this.id}`);
       } 
     }
-  }  
+  }
 }
 </script>
 
