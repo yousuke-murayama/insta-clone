@@ -1,12 +1,12 @@
 <template>
   <div>
-    <p>ImagesEdit: {{ this.id }}</p>
+    <p>ImagesEdit: {{ this.post.id }}</p>
 
     <v-row>
       <v-col cols="12" sm="8" offset-sm="2">
         <ul class="tagLists">
           <li 
-            v-for="(tag, index) in posts[this.id].imgTags" 
+            v-for="(tag, index) in post.imgTags" 
             :key="index"
           >
             {{ `#${tag}` }}
@@ -37,7 +37,7 @@
         </v-row>
 
         <v-img 
-          :src="posts[this.id].imgLink"
+          :src="post.imgLink"
           height="450px"
         >
         </v-img>
@@ -72,8 +72,7 @@ export default {
   },
   data() {
     return {
-      id: this.$route.params.id,
-      post: this.posts[this.$route.params.id],
+      post: '',
       tag: ''
     }
   },
@@ -84,25 +83,31 @@ export default {
         this.tag = '';
       } else {
         this.$emit('add-tag', {
-          id: this.id,
+          id: this.post.id,
           tag: this.tag
         });
         this.tag = '';
       }
     },
     deleteTags() {
-      this.$emit('delete-tags', this.id);
+      this.$emit('delete-tags', this.post.id);
     },
     saveEdition() {
       this.$emit('save-edition', {
-        id: this.id,
+        id: this.post.id,
         comment: this.post.comment
       });
     }
   },
-  //beforeRouteEnterでページをリロードしたときに値を渡したい
+  beforeRouteEnter(to, from , next) {
+    next(vm => {
+      vm.$nextTick().then(() => {
+        vm.post = vm.posts[vm.$route.params.id]
+      })
+    })
+  },
   beforeRouteLeave(to, from, next) {
-    if(to.path === `/show/${this.id}`) {
+    if(to.path === `/show/${this.post.id}`) {
       next();
     } else {
       const answer = window.confirm('編集中のものは保存されませんが、よろしいですか？');
@@ -110,7 +115,7 @@ export default {
           next();
           window.location.reload();
         } else {
-          next(`/edit/${this.id}`);
+          next(`/edit/${this.post.id}`);
       } 
     }
   }
