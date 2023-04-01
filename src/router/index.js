@@ -6,6 +6,7 @@ import ImagesShow from '@/views/ImagesShow.vue'
 import ImagesEdit from '@/views/ImagesEdit.vue'
 import ImagesFavorites from '@/views/ImagesFavorites.vue'
 import ImagesSearch from '@/views/ImagesSearch.vue'
+import NotFound from '@/views/NotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,10 @@ const routes = [
     path: '/search',
     name: 'ImagesSearch',
     component: ImagesSearch
+  },
+  {
+    path: '*',
+    component: NotFound
   }
 ]
 
