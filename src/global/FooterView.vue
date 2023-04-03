@@ -1,7 +1,16 @@
 <template>
-  <div>
-    <p>フッターです</p>
-  </div>
+  <v-footer 
+    padless
+    color="deep-purple accent-4"
+    dark
+  >
+    <v-col
+      class="text-center"
+      cols="12"
+    >
+      {{ new Date().getFullYear() }} — <strong>insta-clone</strong>
+    </v-col>
+  </v-footer>
 </template>
 
 <script>
