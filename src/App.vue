@@ -42,6 +42,7 @@ export default {
         id: this.posts.length,
         img: e.img,
         imgLink: e.imgLink,
+        date: e.date,
         comment: e.comment,
         imgTags: e.imgTags,
         favorite: false

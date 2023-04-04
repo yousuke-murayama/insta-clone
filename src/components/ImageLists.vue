@@ -13,6 +13,7 @@
         >
         </v-img>
       </v-avatar>
+      <v-card-subtitle class="subtitle">{{ post.date }}</v-card-subtitle>
       <v-card-actions>
         <v-btn icon @click="toggleFavorite(post.id)">
           <v-icon :class="{isFavorite: post.favorite}">mdi-heart</v-icon>
@@ -42,5 +43,9 @@ export default {
 <style scoped lang="scss">
 .isFavorite {
   color: #FF66CC !important;
+}
+
+.subtitle {
+  padding-bottom: 0;
 }
 </style>

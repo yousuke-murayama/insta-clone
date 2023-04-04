@@ -47,6 +47,30 @@
       </v-col>
       <!-- 画像のプレビュー -->
       <v-col cols="8" offset="2">
+        <v-menu
+          v-model="menu"
+          :close-on-content-click="false"
+          :nudge-right="40"
+          transition="scale-transition"
+          offset-y
+          min-width="auto"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              label="撮影日"
+              v-model="post.date"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="post.date"
+            @input="menu = false"
+            locale="jp-ja"
+            :day-format="date => new Date(date).getDate()"
+          ></v-date-picker>
+        </v-menu>
         <v-img
           v-if="post.img === null"
           class="defaultImg"
@@ -72,7 +96,8 @@
           block 
           color="cyan"
           :disabled="!post.img || !post.comment"
-          @click="postPicture">
+          @click="postPicture"
+        >
           投稿する
         </v-btn>
       </v-col>  
@@ -88,11 +113,13 @@ export default {
       post: {
         img: null,
         imgLink: '',
+        date: '',
         comment: '',
         imgTags: []
       },
       tag: '',
-      isShow: true
+      isShow: true,
+      menu: false
     }
   },
   methods: {
@@ -109,6 +136,7 @@ export default {
       this.$emit('post-picture', {
         img: this.post.img,
         imgLink: this.post.imgLink,
+        date: this.post.date,
         comment: this.post.comment,
         imgTags: this.post.imgTags
       });
