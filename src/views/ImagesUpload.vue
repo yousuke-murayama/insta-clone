@@ -14,13 +14,15 @@
         <v-btn
           v-if="isShow" 
           class="tagListsBtn" 
-          @click="isShow = !isShow">
+          @click="isShow = !isShow"
+        >
           タグを非表示
         </v-btn>
         <v-btn
           v-if="!isShow" 
           class="tagListsBtn" 
-          @click="isShow = !isShow">
+          @click="isShow = !isShow"
+        >
           タグを表示
         </v-btn>
         <!-- タグ一覧 -->
@@ -40,7 +42,8 @@
           <v-btn 
             @click="addTag" 
             :disabled="!tag"
-            color="primary">
+            color="primary"
+          >
             タグを追加
           </v-btn>
         </v-row>
@@ -95,7 +98,7 @@
         <v-btn 
           block 
           color="cyan"
-          :disabled="!post.img || !post.comment"
+          :disabled="!post.img || !post.comment || !post.date"
           @click="postPicture"
         >
           投稿する

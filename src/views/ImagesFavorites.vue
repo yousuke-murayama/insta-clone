@@ -1,6 +1,7 @@
 <template>
   <div>
     <p>Favorites</p>
+    <h2 v-if="favoritePosts.length === 0">お気に入りの写真はありません。</h2>
     <v-row>
       <ImageLists
         v-for="post in favoritePosts" 
@@ -40,5 +41,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+h2 {
+  text-align: center;
+}
 </style>

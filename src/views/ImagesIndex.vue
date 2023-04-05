@@ -1,6 +1,7 @@
 <template>
   <div class="imgIndex">
     <p>ImagesIndex</p>
+    <h2 v-if="posts.length === 0">写真はありません。</h2>
       <v-row>
         <ImageLists 
           v-for="post in posts" 
@@ -36,5 +37,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+h2 {
+  text-align: center;
+}
 
 </style>

@@ -12,7 +12,7 @@
         </v-text-field> 
       </v-row>
     </v-col>
-    
+
     <v-row>
       <ImageLists
         v-for="post in searchedPosts" 
