@@ -2,7 +2,7 @@
   <div>
     <p>SearchImages</p>
     <v-col cols="12" sm="9" offset-sm="1">
-      <v-row v-if="!isShow">
+      <v-row v-if="isTagSearch">
         <v-text-field 
           label="タグで検索"
           v-model="tagName"
@@ -11,10 +11,10 @@
             mdi-magnify
           </v-icon>
         </v-text-field>
-        <v-btn @click="isShow = !isShow">撮影日で検索</v-btn>
+        <v-btn @click="toggleSearchForm">撮影日で検索</v-btn>
       </v-row>
 
-      <v-row v-else>
+      <v-row v-if="isDateSearch">
         <v-text-field 
           label="撮影日で検索"
           v-model="date"
@@ -23,7 +23,7 @@
             mdi-magnify
           </v-icon>
         </v-text-field>
-        <v-btn @click="isShow = !isShow">タグ名で検索</v-btn>
+        <v-btn @click="toggleSearchForm">タグ名で検索</v-btn>
       </v-row>
     </v-col>
 
@@ -62,13 +62,24 @@ export default {
     return {
       tagName: '',
       date: '',
-      isShow: false,
-      menu: false
+      isTagSearch: true,
+      isDateSearch: false
     }
   },
   methods: {
     toggleFavorite(e) {
       this.$emit('toggle-favorite', e);
+    },
+    toggleSearchForm() {
+      if(this.isTagSearch === true) {
+        this.isTagSearch = false
+        this.isDateSearch = true
+        this.tagName = ''
+      } else {
+        this.isTagSearch = true
+        this.isDateSearch = false
+        this.date = ''
+      }
     }
   },
   computed: {
